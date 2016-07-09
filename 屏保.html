@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        body{overflow: hidden;background: url("38.jpg");background-size: 100% 100%;}
+        .box{
+            width: 190px;height: 60px;background: rgba(178, 123, 61, 0.64);position: absolute;left: 50%;top: 50%;border-radius: 10px;
+            margin-top: -40px;margin-left: -75px;line-height: 60px;text-align: center;font-size: 50px;font-family: "隶书", "黑体";
+            font-weight: bold;text-shadow: 0 0 5px white;cursor: pointer;color: #5d0e27;
+        }
+    </style>
+    <script>
+        function rnd(n,m) {
+            return Math.floor(Math.random()*(m-n)+n);
+        }
+        window.onload=function () {
+            var oDiv=document.querySelector(".box");
+            var oC=document.getElementById("c1");
+            var gd=oC.getContext("2d");
+            var winW=window.innerWidth;
+            var winH=window.innerHeight;
+            var oldC=null;
+            var newC=null;
+            var bClick=false;
+            var arrColor=["white","red","yellow","blue"];
+            oDiv.onmouseover=function () {
+                bClick=true;
+                oDiv.style.webkitTransition=".3s all linear";
+                oDiv.style.boxShadow=" 0 0 25px white";
+                oDiv.style.textShadow="0 0 10px white";
+            };
+            oDiv.onmouseout=function () {
+                bClick=false;
+                oDiv.style.webkitTransition="none";
+                oDiv.style.boxShadow=" 0 0 15px white";
+                oDiv.style.textShadow="0 0 5px white";
+                changeColor(oldC,newC);
+            };
+            oDiv.onclick=function () {
+                window.location.href="1.html";
+            }
+            changeColor(oldC,newC);
+            function changeColor(oldC,newC) {
+                if(bClick)return;
+                newC=rnd(0,4);
+                while (oldC==newC){
+                    newC=rnd(0,4);
+                }
+                oldC=newC;
+                oDiv.style.webkitTransition="2s all linear";
+                oDiv.style.boxShadow=" 0 0 15px "+arrColor[newC];
+                function tranEnd() {
+                    oDiv.removeEventListener("transitionend",tranEnd,false);
+                    changeColor(oldC,newC);
+
+                }
+                oDiv.addEventListener("transitionend",tranEnd,false);
+            }
+            oC.width=winW;
+            oC.height=winH;
+            var n=5;
+            var arr=[];
+            for(var i=0;i<n;i++){
+                arr.push({
+                    x:rnd(0,winW),
+                    y:rnd(0,winH),
+                    speedX:rnd(-10,10),
+                    speedY:rnd(-10,10)
+                })
+            }
+            var aPos=[];
+            var timer=setInterval(function () {
+                gd.clearRect(0,0,oC.width,oC.height);
+                gd.beginPath();
+                gd.moveTo(arr[0].x,arr[0].y);
+                for(var i=1;i<arr.length;i++){
+                    gd.lineTo(arr[i].x,arr[i].y);
+                }
+                gd.strokeStyle="rgba(0,23,255,1)";
+                gd.closePath();
+                gd.stroke();
+                for (var i=0;i<aPos.length;i++){
+                    gd.beginPath();
+                    gd.moveTo(aPos[i][0].x,aPos[i][0].y);
+                    for(var j=1;j<arr.length;j++){
+
+                        gd.lineTo(aPos[i][j].x,aPos[i][j].y);
+                    }
+                    gd.strokeStyle="rgba(0,23,255,"+i/aPos.length+")";
+                    gd.closePath();
+                    gd.stroke();
+                }
+                for(var i=0;i<arr.length;i++){
+                    arr[i].x+=arr[i].speedX;
+                    arr[i].y+=arr[i].speedY;
+                    if(arr[i].x<0||arr[i].x>oC.width)arr[i].speedX*=-1;
+                    if(arr[i].y<0||arr[i].y>oC.height)arr[i].speedY*=-1;
+                }
+                var arr2=[];
+                for(var i=0;i<arr.length;i++){
+                    arr2.push({x:arr[i].x,y:arr[i].y});
+                }
+                aPos.push(arr2);
+                if(aPos.length>20)aPos.shift();
+            },30);
+        }
+    </script>
+</head>
+<body>
+<canvas id="c1"></canvas>
+<div class="box">BEGIN</div>
+</body>
+</html>
