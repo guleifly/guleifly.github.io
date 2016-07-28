@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        #c1{background: black;}
+    </style>
+    <script>
+        function rnd(n,m) {
+            return Math.floor(Math.random()*(m-n)+n);
+        }
+        window.requestAnimationFrame =  window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame||window.requestAnimationFrame ;
+        window.onload=function () {
+            var oC=document.getElementById("c1");
+            var gd=oC.getContext("2d");
+            var canWidth=document.documentElement.clientWidth;
+            var canHeight=document.documentElement.clientHeight;
+            var arr=["顾雷","web前端开发","广阔天地，大有作为"];
+            var k=0;
+            oC.width=canWidth;
+            oC.height=canHeight;
+            var beginTime=0;
+            var now=0;
+            var skewing=250;
+            var particle=[];
+            var m=0;
+            var scale=0;
+            var dots2=[];
+            var pause=true;
+            var converge=true;
+            function dot(x,y,z,r) {
+                this.x=0;
+                this.y=0;
+                this.z=0;
+                this.dx=x;
+                this.dy=y;
+                this.dz=z;
+                this.tx=x;
+                this.ty=y;
+                this.tz=z;
+                this.r=r;
+
+            }
+            dot.prototype.paint=function () {
+                scale=skewing/(skewing+this.z);
+                gd.save();
+                gd.beginPath();
+                gd.arc((this.x-oC.width/2)*scale+oC.width/2,(this.y-oC.height/2)*scale+oC.height/2,this.r*scale,0,2*Math.PI,false);
+                gd.fillStyle="rgba(103,77,230,"+ scale +")";
+                gd.fill();
+                gd.restore();
+            };
+            Array.prototype.forEach=function (callback) {
+                for(var i=0;i<this.length;i++){
+                    callback.call(this[i]);
+                }
+            };
+            function drawText(str) {
+                gd.clearRect(0,0,oC.width,oC.height);
+                gd.fillStyle = "rgba(168,168,168,1)";
+                gd.textAlign="center";
+                gd.textBaseline="middle";
+                gd.font="150px 微软雅黑";
+                gd.fillText(str,oC.width/2,oC.height/2);
+                gd.fill();
+            }
+
+            function getImgData(str) {
+                drawText(str);
+                var dots=[];
+                var imgData=gd.getImageData(0,0,oC.width,oC.height);
+                for(var i=0;i<oC.height;i+=6){
+                    for(var j=0;j<oC.width;j+=6){
+                        m=4*(i*oC.width+j);
+                        if(imgData.data[m+3]>128){
+                            var dott=new dot(j,i,0,3);
+                            dots.push(dott);
+                        }
+                    }
+                }
+                return dots;
+            }
+            function init(str) {
+                dots2=getImgData(str);;
+                dots2.forEach(function () {
+                    this.x=rnd(0,oC.width);
+                    this.y=rnd(0,oC.height);
+                    this.z=rnd(-skewing,skewing);
+                    this.tx=rnd(0,oC.width);
+                    this.ty=rnd(0,oC.height);
+                    this.tz=rnd(-skewing,skewing);
+                    this.paint();
+                });
+                move();
+            }
+            function move() {
+                gd.clearRect(0,0,oC.width,oC.height);
+                dots2.forEach(function () {
+                    now=new Date();
+                    if(converge){
+                        if(Math.abs(this.x-this.dx)<1&&Math.abs(this.y-this.dy)<1&&Math.abs(this.z-this.dz)<1){
+                            this.x=this.dx;
+                            this.y=this.dy;
+                            this.z=this.dz;
+                            if(now-beginTime>1000)converge=false;
+                        }else {
+                            this.x=this.x+(this.dx-this.x)*0.1;
+                            this.y=this.y+(this.dy-this.y)*0.1;
+                            this.z=this.z+(this.dz-this.z)*0.1;
+                            beginTime=new Date();
+                        }
+                    }else {
+                        if(Math.abs(this.x-this.tx)<1&&Math.abs(this.y-this.ty)<1&&Math.abs(this.z-this.dz)<1){
+                            this.x=this.tx;
+                            this.y=this.ty;
+                            this.z=this.tz;
+                            pause=false;
+                        }else {
+                            this.x=this.x+(this.tx-this.x)*0.1;
+                            this.y=this.y+(this.ty-this.y)*0.1;
+                            this.z=this.z+(this.tz-this.z)*0.1;
+                        }
+                    }
+                    this.paint();
+                })
+                if(pause){
+                    window.requestAnimationFrame(move);
+                }else {
+                    setTimeout(function () {
+                        pause=true;
+                        converge=true;
+                        k++;
+                        init(arr[k%3]);
+                    },500);
+                }
+            }
+            init(arr[k%3]);
+        };
+    </script>
+</head>
+<body>
+<canvas id="c1" ></canvas>
+</body>
+</html>

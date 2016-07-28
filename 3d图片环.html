@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;list-style-type: none;
+        }
+        body{
+            overflow: hidden;background: #000;
+        ;
+        }
+        ul{
+            width:133px ;height: 200px;margin: 200px auto;position: relative;-webkit-transform-style: preserve-3d;
+            -webkit-transform:perspective(800px) rotateY(0deg) rotateX(0deg);background: #ccc;
+        }
+        li{
+            width:133px ;height: 200px;position: absolute;border-radius: 10px;overflow: hidden;box-shadow: 0 0 20px white;
+            -webkit-transform:rotateY(0deg) translateZ(0px);
+        }
+
+    </style>
+    <script>
+        window.onload= function () {
+            var aLi=document.querySelectorAll("li");
+            var oUl=document.querySelector("ul");
+            for(var i=0;i<aLi.length;i++){
+                aLi[i].style.webkitTransition="1s all ease "+(11-i)*100+"ms";
+                aLi[i].style.webkitTransform="rotateY("+360*i/11+"deg) translateZ(350px)"
+            }
+            var x = 0;
+            var y = 0;
+            var iSpeedX = 0;
+            var iSpeedY = 0;
+            var lastX = 0;
+            var lastY = 0;
+            var timer = null;
+            var bClick=false;
+            oUl.onmousedown= function (e) {
+                clearInterval(timer);
+                var disL= e.clientX-x;
+                var dist= e.clientY-y;
+                document.onmousemove= function (e) {
+                    x= e.clientX-disL;
+                    y= e.clientY-dist;
+                    oUl.style.webkitTransform="perspective(800px) rotateX("+-y/5+"deg) rotateY("+x/5+"deg)";
+                    iSpeedX= e.clientX-lastX;
+                    iSpeedY= e.clientY-lastY;
+                    lastX= e.clientX;
+                    lastY= e.clientY;
+                };
+                document.onmouseup= function () {
+                    document.onmouseup=document.onmousemove=null;
+                    timer=setInterval(function () {
+                        iSpeedX*=0.95;
+                        iSpeedY*=0.95;
+                        x+=iSpeedX;
+                        y+=iSpeedY;
+                        oUl.style.webkitTransform="perspective(800px) rotateX("+-y/5+"deg) rotateY("+x/5+"deg)";
+                        if(Math.abs(iSpeedX)<0.5)iSpeedX=0;
+                        if(Math.abs(iSpeedY)<0.5)iSpeedY=0;
+                        if(iSpeedX==0&&iSpeedY==0)clearInterval(timer);
+                    },30);
+
+                };
+                return false;
+            }
+        }
+    </script>
+</head>
+<body>
+<ul>
+    <li><img src="img/图片环/1.jpg" alt=""/></li>
+    <li><img src="img/图片环/2.jpg" alt=""/></li>
+    <li><img src="img/图片环/3.jpg" alt=""/></li>
+    <li><img src="img/图片环/4.jpg" alt=""/></li>
+    <li><img src="img/图片环/5.jpg" alt=""/></li>
+    <li><img src="img/图片环/6.jpg" alt=""/></li>
+    <li><img src="img/图片环/7.jpg" alt=""/></li>
+    <li><img src="img/图片环/8.jpg" alt=""/></li>
+    <li><img src="img/图片环/9.jpg" alt=""/></li>
+    <li><img src="img/图片环/10.jpg" alt=""/></li>
+    <li><img src="img/图片环/11.jpg" alt=""/></li>
+</ul>
+</body>
+</html>

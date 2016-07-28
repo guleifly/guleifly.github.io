@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;list-style-type: none;
+        }
+        html,body{height: 100%;}
+        body{background: #d9d9d9;overflow: hidden;}
+        body>div{float: left;}
+        #top{height:100%;width: 20%;background: rgba(42, 51, 48, 0.87) ; }
+        #top ul{width: 80%;height: 360px;background: rgba(42, 51, 48, 0.87) ;margin: 50px auto;}
+        #top ul li{width:100%;font-size: 22px;line-height:60px;display:inline-block;font-family: "微软雅黑", "黑体";font-weight: bold;text-align: center;}
+        #top ul li:hover{background: #2f0e1b;cursor: pointer;}
+        #top ul li a{text-decoration: none;color: white;display: inline-block;width: 100%;height: 100%;}
+        #work{width: 80%;height:100%;border: 1px solid rgba(36, 197, 255, 0.44);text-align: center;overflow: auto;box-sizing: border-box;}
+        #work>div>span{padding: 10px;font-family: "微软雅黑", "宋体";font-size: 30px;color: white;font-weight: bold;display: inline-block;width: 100%;background: #ccc;}
+        #work>div>div{width: 80%;height: 360px;background: rgba(42, 51, 48, 0.87) ;margin: 20px auto;}
+        #work>div>div>span{font-family: "微软雅黑", "宋体";font-size: 20px;color: white;font-weight: bold;width: 100%;display: inline-block;background: #92972c;height: 30px;line-height: 30px;}
+        #work>div>div>div{width: 100%;height:calc(100% - 30px);background: rgb(99, 78, 76);}
+        #js .works{width: 100%;}
+        #warpper{  width: 750px;  margin: 80px auto;  position: relative;  height: 160px;  overflow: hidden;  display: inline-block;  }
+        #warpper ul{  width: 612px;  position: absolute;  left: 0;  top: 0;  }
+        #warpper ul li{  width: 612px;  height: 160px;  overflow: hidden;  }
+        #warpper ol{  position: absolute;  right: 0;  z-index: 2;  }
+        #warpper ol li img{  overflow: hidden;  cursor: pointer;  border: 4px solid #dedede;  }
+        #warpper ol li{  height: 50px;  overflow: hidden;  margin-bottom: 5px;  }
+        .block{  display: block;  position: absolute;  background: url(img/tab/control_current.png) no-repeat;  height: 50px;  width: 127px;  right: 0px;  z-index: 4;  top: 0;  cursor: pointer;  }
+        #pubu{position: relative;}
+        #pubu ul{width: 20%;margin-left: 10%;float: left;}
+        #pubu ul li{width: 100%;height: 200px;border: 1px solid black;margin-bottom: 1px;}
+        #change1{width: 400px;height: 300px;margin: 15px auto;background: url("img/运动/001.png");display: inline-block;overflow: hidden;}
+        #change1 span{width: 20px;height: 20px;display:block;float: left;}
+        #animate2{overflow: hidden;position: relative;}
+        #change2{width: 2500px;height:150px;margin: 90px 0px;display: inline-block;position: absolute;left: 0;top: 0;}
+        #change2 li{width:150px;height: 150px;background: yellow;float: left;border: 1px solid black;opacity: 0.5;position: relative;z-index: 0;}
+        #change2 .first{opacity: 0.75;margin-left: -100px;width: 250px;height: 250px;margin-top: -25px;background: #cc8851;z-index: 1;}
+        #change2 .second{opacity: 1;margin-left: -125px;width: 300px;height: 300px;margin-top: -50px;background: #7b80cc;z-index: 2;}
+        #change2 .three{opacity: 0.75;margin-left: -100px;width: 250px;height: 250px;margin-top: -25px;background: #5af4d0;z-index: 1;}
+        #change2 .four{margin-left: -100px;z-index: 0;}
+        #work .works{position: relative;}
+        #work a{width: 200px;line-height: 60px;background: #3378ef;text-decoration: none;color: #ccf4ce;position:absolute;left: 0;top: 0;right: 0;bottom: 0;
+            height: 60px;font-weight: bold;font-size: 20px;font-family: "微软雅黑", "宋体";display: block;border-radius: 10px;
+            box-shadow:inset 0 0 5px white;margin: auto;
+        }
+        #work a:hover{
+            box-shadow:inset 0 0 10px 2px #83e5d4;
+        }
+    </style>
+    <script src="js/js.js"></script>
+    <script>
+        function rnd(n,m) {
+            return Math.floor(Math.random()*(m-n)+n);
+        }
+        window.onload=function () {
+            //选项卡
+            var oCard=document.getElementById("card");
+            var aCardLi=oCard.getElementsByTagName("li");
+            var oTab=document.getElementById("clickTab");
+            var aTabLi=oTab.getElementsByTagName("li");
+            var oEm=document.getElementById("block");
+            var bover=false;
+            var top=oCard.offsetTop;
+            var n=0;
+            var timer=null;
+            for(var i=0;i<aTabLi.length;i++){
+                (function (index) {
+                    aTabLi[index].onmouseover=function () {
+                        if(bover)return;
+                        bover=true;
+                        oEm.style.top=index*55+"px";
+                        timer=setInterval(function () {
+                            var cur=(-index*160-top)*n/10;
+                            oCard.style.top=top+cur+"px";
+                            n++;
+                            if(n>10){
+                                clearInterval(timer);
+                                top=oCard.offsetTop;
+                                n=0;
+                                bover=false;
+                            }
+                        },16);
+                    }
+                })(i);
+            }
+
+            //瀑布流
+            var oPubu=document.getElementById("pubu");
+            var aUl=oPubu.getElementsByTagName("ul");
+            var arr=[];
+            addLi(10);
+            oPubu.onmousewheel=function () {
+                if(oPubu.offsetHeight+oPubu.scrollTop>=aUl[0].offsetHeight){
+                    addLi(6);
+                }
+            };
+            function createLi() {
+                var oLi=document.createElement("li");
+                oLi.style.height=rnd(60,160)+"px";
+                oLi.style.background="rgb("+rnd(0,255)+","+rnd(0,255)+","+rnd(0,255)+")";
+                for(var i=0;i<aUl.length;i++){
+                    arr.push(aUl[i]);
+                }
+                arr.sort(function (n,m) {
+                    return n.offsetHeight-m.offsetHeight;
+                });
+                arr[0].appendChild(oLi);
+            }
+            function addLi(n) {
+                for(var i=0;i<n;i++){
+                    createLi();
+                }
+            }
+            
+            
+            
+            //运动1
+            var oChangeDiv1=document.getElementById("change1");
+
+            var  bClick=0;
+            var click=false;
+            addSpan(oChangeDiv1);
+            function addSpan(obj) {
+                for(var i=0;i<15;i++){
+                    for(var j=0;j<20;j++){
+                        var oSpan=document.createElement("span");
+                        oSpan.style.background="url('img/运动/000.png') "+-j*20+"px "+-i*20+"px";
+                        oSpan.r=j;
+                        oSpan.l=i;
+                        obj.appendChild(oSpan);
+
+                    }
+                }
+            }
+            oChangeDiv1.onclick=function () {
+                if(click)return;
+                click=true;
+                bClick++;
+                var aSpan=oChangeDiv1.children;
+                for(var i=0;i<aSpan.length;i++) {
+                    (function (index) {
+                        setTimeout(function () {
+                            move(aSpan[index], {opacity: 0}, {type: "ease-out", time: 300, fn: function () {
+                                    if (index == aSpan.length - 1) {
+                                        for (var j = 0; j < aSpan.length; j++) {
+                                            aSpan[j].style.opacity = 1;
+                                            aSpan[j].style.backgroundImage = "url('img/运动/00" + bClick % 4 + ".png')";
+                                        }
+                                        oChangeDiv1.style.backgroundImage = "url('img/运动/00" + (bClick + 1) % 4 + ".png')";
+                                        click = false;
+                                    }
+                                }
+                            })}, (aSpan[i].r + aSpan[i].l) * 30)
+                    })(i);
+                }
+            };
+
+
+            //运动2
+            var oChangeDiv2=document.getElementById("change2");
+            var oAnimate2=document.getElementById("animate2");
+            var aChangeLi=oChangeDiv2.getElementsByTagName("li");
+            var l=0;
+            var arrClass=[];
+            oChangeDiv2.onmousedown=function (e) {
+                var e=event||e;
+                var disL=e.clientX-l;
+                document.onmousemove=function (e) {
+                    //alert()
+                    l=e.clientX-disL;
+                    oChangeDiv2.style.left=l+"px";
+                    setSize();
+                }
+                document.onmouseup=function () {
+                    document.onmouseup=document.onmousemove=null;
+                }
+                return false;
+            };
+
+            setSize();
+            function setSize() {
+                for(var i=0;i<aChangeLi.length;i++) {
+                    arrClass.push(aChangeLi[i].offsetLeft);
+                }
+                for(var i=0;i<aChangeLi.length;i++){
+
+                    var dis=380-(arrClass[i]+aChangeLi[i].offsetWidth/2+oChangeDiv2.offsetLeft);
+                    var scale=1-Math.abs(dis)/608;
+                    if(scale<0.5)scale=0.5;console.log(dis,scale);
+                    aChangeLi[i].style.width=scale*300+"px";
+                    aChangeLi[i].style.height=scale*300+"px";
+                    aChangeLi[i].style.opacity=scale;
+                    aChangeLi[i].style.marginTop=-(scale-0.5)*150+"px";//-50 20
+                    aChangeLi[i].style.marginLeft=-(scale-0.5)*150+"px";
+                    aChangeLi[i].style.zIndex=parseInt(scale*1000);
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+<div id="top">
+    <ul>
+        <li><a href="#js">JavaScript</a></li>
+        <li><a href="#h5cs3">HTML5&CSS3</a></li>
+        <li><a href="#ajax">AJAX</a></li>
+        <li><a href="#jsonp">JSONP</a></li>
+        <li><a href="#oo">面向对象</a></li>
+        <li><a href="#zh">综合</a></li>
+    </ul>
+</div>
+<div id="work">
+    <div id="js">
+        <span>JavaScript</span>
+        <div>
+            <span>选项卡</span>
+            <div class="works">
+                <div id="warpper">
+                    <ul id="card">
+                        <li><img src="img/tab/001.jpg" alt="" /></li>
+                        <li><img src="img/tab/002.jpg" alt="" /></li>
+                        <li><img src="img/tab/003.jpg" alt="" /></li>
+                    </ul>
+                    <em class="block"id="block"></em>
+                    <ol id="clickTab">
+                        <li class="cur"><img src="img/tab/001s.jpg" alt="" /></li>
+                        <li><img src="img/tab/002s.jpg" alt="" /></li>
+                        <li><img src="img/tab/003s.jpg" alt="" /></li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div>
+            <span>瀑布流</span>
+            <div class="works" style="overflow: auto;" id="pubu">
+                <ul>
+                </ul>
+                <ul>
+                </ul>
+                <ul>
+                </ul>
+            </div>
+        </div>
+        <div>
+            <span>运动1</span>
+            <div class="works" id="animate1">
+                <div id="change1"></div>
+            </div>
+        </div>
+        <div>
+            <span>运动2</span>
+            <div class="works" id="animate2">
+                <ul id="change2">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+    <div id="h5cs3">
+        <span>HTML5&CSS3</span>
+        <div>
+            <span>H5粒子效果</span>
+            <div class="works">
+                <a href="h5.html" target="_blank">H5粒子效果</a>
+            </div>
+        </div>
+        <div>
+            <span>3D图片环</span>
+            <div class="works">
+                <a href="3d图片环.html"target="_blank">3d图片环</a>
+            </div>
+        </div>
+    </div>
+    <div id="ajax">
+        <span>AJAX</span>
+        <div>
+            <span>网站模板</span>
+            <div class="works">
+                <a href="mythicalAnimals.html" target="_blank">网站模板</a>
+            </div>
+        </div>
+    </div>
+    <div id="jsonp">
+        <span>JSONP</span>
+        <div>
+            <span>搜索框</span>
+            <div class="works"></div>
+        </div>
+        <div>
+            <span>手机号码</span>
+            <div class="works"></div>
+        </div>
+    </div>
+    <div id="oo">
+        <span>面向对象</span>
+        <div>
+            <span>面向对象</span>
+            <div class="works">
+                <a href="h5.html" target="_blank">面向对象</a>
+            </div>
+        </div>
+    </div>
+    <div id="zh">
+        <span>综合</span>
+        <div>
+            <span>淘宝</span>
+            <div class="works">
+                <a href="h5.html" target="_blank">淘宝</a>
+            </div>
+        </div>
+        <div>
+            <span>小龙虾</span>
+            <div class="works">
+                <a href="http://longxia.hlzsk.com/" target="_blank">小龙虾</a>
+            </div>
+        </div>
+        <div>
+            <span>婚庆</span>
+            <div class="works">
+                <a href="http://hunqin.hlzsk.com/" target="_blank">婚庆</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

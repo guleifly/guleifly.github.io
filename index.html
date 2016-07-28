@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        a{text-decoration: none;color: black;}
+        body{overflow-x: hidden;}
+        html,body{height: 100%;}
+        .nav{width:100%;height: 60px;background: #454545;position: fixed;right: 0;left:0;top: 0;margin: auto;z-index: 1;}
+        .nav ul{width:800px;height: 100%;margin: 0 auto;list-style-type: none;}
+        .nav ul li{width: 25%;height: 100%;float: left;text-align: center;cursor: pointer;}
+        .nav ul li:hover{background: #2f0e1b;}
+        .nav ul li a{width:100%;height:100%;color: white;font-size: 22px;line-height:60px;display:inline-block;font-family: "微软雅黑", "黑体";font-weight: bold; }
+        .top{width: 100%;height: 100%;}
+        #inf{width:100%;height: 100%;background: url("img/index/15.jpg");background-size: 100% 100%;position: absolute;left: 0;top: 0;z-index: -1;}
+        #c1{background: #2d0c0c;opacity: 0.5;}
+        .skill{background: #7f9bff;height: 600px;position: relative;}
+        .skill .des{width: 440px;padding-top: 170px;margin-left:40px;float: left;opacity: 0;transform: translate(-500px,0);}
+        .skill .des li{width: 100%;font-family: "微软雅黑", "黑体";line-height: 40px;font-weight: bold;color: white;}
+        .skill .middle{width: 150px;height: 150px;border-radius: 50%;color: white;font-size: 30px;text-align: center;line-height: 150px;
+            position: absolute;left: 50%;top: 50%;margin-left: -75px;margin-top: -75px;background: #6b3933;
+            font-family: "微软雅黑", "黑体";font-weight: bold;cursor: pointer;box-shadow:0 0 20px white;
+            -webkit-transition: .2s all ease;
+            -moz-transition: .2s all ease;
+            -ms-transition: .2s all ease;
+            -o-transition: .2s all ease;
+            transition: .2s all ease;}
+        .skill .middle:hover{
+            box-shadow:0 0 20px 10px white;
+        }
+        .skill ul{width: 440px;position: absolute;top: 150px;right: 80px;opacity: 0;transform: translate(500px,0);}
+        .skill .tab li{width:440px;height: 40px;font-family: "微软雅黑", "黑体";font-weight: bold;color: white;margin-top: 20px;line-height: 40px;}
+        .skill .tab li .bar{width: 300px;height:20px;background: #ffd26d;border-radius: 10px;float:right;display: inline-block; margin-top: 10px; position: relative;overflow: hidden;}
+        .skill .tab li .bar span{width:0px;height: 20px;background: #ff0e0e;border-radius: 10px;display: inline-block;position: absolute;left:0;top:0;overflow: hidden;font-size: 10px;line-height: 20px;}
+        .skill .tab li .bar img{transform: scale(-1,1);height: 20px;position: absolute;left:-20px;top:0px;}
+        .works,.about,.contact{overflow: hidden;position: relative;}
+        .works ul,.about ul{width: 440px;list-style-type: none;margin-top: 100px;float: left;}
+        @keyframes test{
+            from{background-position:0 0;}
+            to{background-position:440px 0;}
+        }
+        .works ul li{width: 100%;height: 60px;background: #34314a;margin-top: 50px;border-radius: 10px;box-shadow:inset 0 0 10px white;
+            background:-webkit-linear-gradient(-45deg,rgba(0,0,0,1) 50px,rgba(255,255,255,1) 70px,rgba(255,255,255,1) 70px,rgba(0,0,0,1) 80px);background-position:0 0;
+            animation-name:test;
+            animation-duration:2s;
+            animation-timing-function:linear;
+            animation-iteration-count:infinite;
+        }
+        .works ul li:hover{box-shadow:inset 0 0 20px 2px white; }
+        .works ul li a{width: 100%;height: 100%;text-align: center;font-size: 40px;line-height: 60px;color: white;font-weight: bold;display: inline-block;font-family: "微软雅黑", "黑体";}
+        .works .left,.about .left{margin-left: 30px;transform: translate(-500px,0);opacity: 0;}
+        .works .right,.about .right{margin-right: 30px;float: right;transform: translate(500px,0);opacity: 0;}
+        .works .middle,.about .middle,.contact .middle{height: 150px;width: 150px;position: absolute;left: 50%;top: 50%;margin-left: -75px;margin-top: -75px;text-align: center;line-height: 150px;background: #95b137;
+            font-family: "微软雅黑", "黑体";font-weight: bold;cursor: pointer;box-shadow:0 0 20px white;border-radius: 50%;color: white;font-size: 30px;
+            -webkit-transition: .2s all ease;
+            -moz-transition: .2s all ease;
+            -ms-transition: .2s all ease;
+            -o-transition: .2s all ease;
+            transition: .2s all ease;}
+        .about .middle{background: #ff0000;}
+        .contact .middle{background: yellow;color: #807a37;}
+        .works .middle:hover,.about .middle:hover,.contact .middle:hover{
+            box-shadow:0 0 20px 10px white;
+        }
+        .about ul li{width: 100%;height: 40px;margin-top: 30px;border-radius: 10px;color: #87e9ff;line-height: 40px;font-family: "微软雅黑", "黑体";font-weight: bold;font-size: 20px;}
+        .about ul li span{height: 100%;width: 100px;text-align: right;display: inline-block;}
+        .contact div{width: 440px;height:500px;margin-top: 5px;float: left;border: 1px solid rgba(251, 101, 78, 0.67)
+        }
+        .contact .left{margin-left: 50px;padding-top: 150px;height: 350px;transform: translate(-500px,0);opacity: 0;}
+        .contact .right{float: right;margin-right: 50px;transform: translate(500px,0);opacity: 0;}
+        .contact .left span{width: 400px;height: 60px;line-height: 60px;display: inline-block;color: white;font-size: 25px;font-weight: bold;font-family: "微软雅黑", "黑体";margin-left: 40px;}
+        .anchorBL{
+            display:none
+        }
+        .contact{position: relative;}
+        .contact .bottom{width: 100%;height: 100%;position: absolute;left: 0;top: 0;background: rgba(0,0,0,0.5);display: block;}
+    </style>
+    <script src="js/jquery.min.js"></script>
+    <script src="http://api.map.baidu.com/api?v=1.4"></script>
+    <script>
+        function rnd(n,m) {
+            return Math.floor(Math.random()*(m-n)+n);
+        }
+        window.requestAnimationFrame =  window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame||window.requestAnimationFrame ;
+        window.onload=function () {
+            var oC=document.getElementById("c1");
+            var gd=oC.getContext("2d");
+            var canWidth=document.documentElement.clientWidth;
+            var canHeight=document.documentElement.clientHeight;
+            var arrDot=["顾雷","web前端开发","广阔天地 大有作为"];
+            var k=0;
+            oC.width=canWidth;
+            oC.height=canHeight;
+            var beginTime=0;
+            var now=0;
+            var skewing=250;
+            var particle=[];
+            var m=0;
+            var scale=0;
+            var dots2=[];
+            var pause=true;
+            var converge=true;
+            function dot(x,y,z,r) {
+                this.x=0;
+                this.y=0;
+                this.z=0;
+                this.dx=x;
+                this.dy=y;
+                this.dz=z;
+                this.tx=x;
+                this.ty=y;
+                this.tz=z;
+                this.r=r;
+
+            }
+            dot.prototype.paint=function () {
+                scale=skewing/(skewing+this.z);
+                gd.save();
+                gd.beginPath();
+                gd.arc((this.x-oC.width/2)*scale+oC.width/2,(this.y-oC.height/2)*scale+oC.height/2,this.r*scale,0,2*Math.PI,false);
+                gd.fillStyle="rgba(255,255,0,"+ scale +")";
+                gd.fill();
+                gd.restore();
+            };
+            Array.prototype.forEach=function (callback) {
+                for(var i=0;i<this.length;i++){
+                    callback.call(this[i]);
+                }
+            };
+            function drawText(str) {
+                gd.clearRect(0,0,oC.width,oC.height);
+                gd.fillStyle = "rgba(168,168,168,1)";
+                gd.textAlign="center";
+                gd.textBaseline="middle";
+                gd.font="150px 微软雅黑";
+                gd.fillText(str,oC.width/2,oC.height/2);
+                gd.fill();
+            }
+
+            function getImgData(str) {
+                drawText(str);
+                var dots=[];
+                var imgData=gd.getImageData(0,0,oC.width,oC.height);
+                for(var i=0;i<oC.height;i+=6){
+                    for(var j=0;j<oC.width;j+=6){
+                        m=4*(i*oC.width+j);
+                        if(imgData.data[m+3]>128){
+                            var dott=new dot(j,i,0,3);
+                            dots.push(dott);
+                        }
+                    }
+                }
+                return dots;
+            }
+            function init(str) {
+                dots2=getImgData(str);
+                dots2.forEach(function () {
+                    this.x=rnd(0,oC.width);
+                    this.y=rnd(0,oC.height);
+                    this.z=rnd(-skewing,skewing);
+                    this.tx=rnd(0,oC.width);
+                    this.ty=rnd(0,oC.height);
+                    this.tz=rnd(-skewing,skewing);
+                    this.paint();
+                });
+                animate();
+            }
+            function animate() {
+                gd.clearRect(0,0,oC.width,oC.height);
+                dots2.forEach(function () {
+                    now=new Date();
+                    if(converge){
+                        if(Math.abs(this.x-this.dx)<1&&Math.abs(this.y-this.dy)<1&&Math.abs(this.z-this.dz)<1){
+                            this.x=this.dx;
+                            this.y=this.dy;
+                            this.z=this.dz;
+                            if(now-beginTime>1000)converge=false;
+                        }else {
+                            this.x=this.x+(this.dx-this.x)*0.1;
+                            this.y=this.y+(this.dy-this.y)*0.1;
+                            this.z=this.z+(this.dz-this.z)*0.1;
+                            beginTime=new Date();
+                        }
+                    }else {
+                        if(Math.abs(this.x-this.tx)<1&&Math.abs(this.y-this.ty)<1&&Math.abs(this.z-this.dz)<1){
+                            this.x=this.tx;
+                            this.y=this.ty;
+                            this.z=this.tz;
+                            pause=false;
+                        }else {
+                            this.x=this.x+(this.tx-this.x)*0.1;
+                            this.y=this.y+(this.ty-this.y)*0.1;
+                            this.z=this.z+(this.tz-this.z)*0.1;
+                        }
+                    }
+                    this.paint();
+                })
+                if(pause){
+                    window.requestAnimationFrame(animate);
+                }else {
+                    setTimeout(function () {
+                        pause=true;
+                        converge=true;
+                        k++;
+                        init(arrDot[k%3]);
+                    },500);
+                }
+            }
+            init(arrDot[k%3]);
+
+
+            //skill
+            var arr=[0.8,0.8,0.7,0.5,0.5];
+            var oSkill=document.getElementById("skill");
+            var oSkMid=oSkill.getElementsByTagName("div")[0];
+            var oSkUl=oSkill.getElementsByTagName("ul")[0];
+            var oSkOl=oSkill.getElementsByTagName("ol")[0];
+            oSkMid.onmouseover=function () {
+                move(oSkOl);
+                move(oSkUl);
+                function tranEnd() {
+                    oSkUl.removeEventListener("transitionend",tranEnd,false);
+                    var aSpan=oSkUl.getElementsByClassName("percent");
+                    var aImg=oSkUl.getElementsByTagName("img");
+                    for(var i=0;i<aSpan.length;i++){
+                        aSpan[i].style.webkitTransition="4s all linear";
+                        aSpan[i].style.width=arr[i]*300+"px";
+                        aImg[i].style.webkitTransition="4s all linear";
+                        aImg[i].style.left=arr[i]*300+"px";
+                    }
+                }
+                oSkUl.addEventListener("transitionend",tranEnd,false);
+            };
+            //works
+            var oWorks=document.getElementById("works");
+            var aUl=oWorks.getElementsByTagName("ul");
+            var oWorksMid=oWorks.getElementsByTagName("div")[0];
+            oWorksMid.onmouseover=function () {
+                move(aUl[0]);
+                move(aUl[1]);
+            };
+            //about
+            var oAbout=document.getElementById("about");
+            var aAboutUl=oAbout.getElementsByTagName("ul");
+            var oAboutsMid=oAbout.getElementsByTagName("div")[0];
+            oAboutsMid.onmouseover=function () {
+                move(aAboutUl[0]);
+                move(aAboutUl[1]);
+            };
+            //contact
+            var oContact=document.getElementById("contact");
+            var oContactsMid=oContact.getElementsByTagName("div");
+            oContactsMid[1].onmouseover=function () {
+                move(oContactsMid[0]);
+                move(oContactsMid[2]);
+            };
+            function move(obj) {
+                obj.style.webkitTransition="2s all ease";
+                obj.style.webkitTransform="translate(0,0)";
+                obj.style.opacity=1;
+            }
+            
+            //map
+            myPosition();
+            function myPosition() {
+                var map = new BMap.Map("map");
+                var point = new BMap.Point(121.437625,31.154789);
+                map.centerAndZoom(point, 15);
+
+                var marker = new BMap.Marker(point);        // 创建标注
+                map.addOverlay(marker);                     // 将标注添加到地图中
+                //map.addControl(new BMap.NavigationControl());
+                //map.addControl(new BMap.ScaleControl());
+                map.enableScrollWheelZoom();
+            }
+        }
+    </script>
+</head>
+<body>
+<div class="nav">
+    <!--<img src="img/arrr.png" alt="" style="height: 60px;width: 30px;position: absolute;left: 30px;top: 0;">-->
+    <ul>
+        <li><a href="#skill">技能</a></li>
+        <li><a href="#works" class="ra">作品</a></li>
+        <li><a href="#about" class="ra">关于</a></li>
+        <li><a href="#contact">联系</a></li>
+    </ul>
+</div>
+<div class="top">
+    <div id="inf"></div>
+    <canvas id="c1" width="1400" height="800"></canvas>
+</div>
+<div class="skill" id="skill">
+    <ol class="des" type="1">
+        <li>熟练使用HTML、CSS、JavaScript、jQuery、Ajax、Jsonp、DOM等前端技术，开发过jQuery插件。</li>
+        <li>熟悉html5、CSS3的使用。</li>
+        <li>有Node.js、PHP基础，对服务器端开发有一定了解。</li>
+        <li>对AngularJs有一定了解。</li>
+        <li>熟悉Java语言，完成过基于Java的坦克大战游戏的设计，了解C/C++。</li>
+    </ol>
+    <div class="middle">专业技能</div>
+    <ul class="tab">
+        <li>JavaScript<span class="bar"><span class="percent">&nbsp;&nbsp;80%</span><img src="img/index/gg.gif" alt=""></span></li>
+        <li>HTML&CSS<span class="bar"><span class="percent">&nbsp;&nbsp;80%</span><img src="img/index/gg.gif" alt=""></span></li>
+        <li>jQuery<span class="bar"><span class="percent">&nbsp;&nbsp;70%</span><img src="img/index/gg.gif" alt=""></span></li>
+        <li>HTML5&CSS3<span class="bar"><span class="percent">&nbsp;&nbsp;50%</span><img src="img/index/gg.gif" alt=""></span></li>
+        <li>Java <span class="bar"><span class="percent">&nbsp;&nbsp;50%</span><img src="img/index/gg.gif" alt=""></span></li>
+    </ul>
+</div>
+<div class="works" id="works" style="background: #a1a679;height: 600px;">
+    <ul class="left">
+        <li><a href="js.html#js" target="_blank">JavaScript</a></li>
+        <li><a href="js.html#ajax" target="_blank">AJAX</a></li>
+        <li><a href="js.html#oo" target="_blank">面向对象</a></li>
+    </ul>
+    <div class="middle">作品展示</div>
+    <ul class="right">
+        <li><a href="js.html#h5cs3" target="_blank">HTML5&CSS3</a></li>
+        <li><a href="js.html#jsonp" target="_blank">JSONP</a></li>
+        <li><a href="js.html#zh" target="_blank">综合</a></li>
+    </ul>
+</div>
+<div class="about" id="about" style="background: #bfc447;height: 600px;">
+    <ul class="left">
+        <li><span>姓名</span>：顾雷</li>
+        <li><span>籍贯</span>：江苏连云港</li>
+        <li><span>年龄</span>：23</li>
+        <li><span>专业</span>：电子信息科学与技术 计算机系</li>
+        <li><span>院校</span>：南京工程学院 本科</li>
+    </ul>
+    <div class="middle">个人简介</div>
+    <ul class="right">
+        <li><span>期望职业</span>：WEB前端开发</li>
+        <li><span>期望行业</span>：互联网/电子商务</li>
+        <li><span>工作地区</span>：上海</li>
+        <li><span>工作性质</span>：全职</li>
+        <li><span>目前状态</span>：我目前处于离职状态，可立即上岗</li>
+    </ul>
+</div>
+<div class="contact" id="contact" style="background: url('img/index/32.jpg');background-size: 100% 100%;height: 510px;">
+    <span class="bottom"></span>
+    <div class="left">
+        <span>电话：15189802691</span>
+        <span>邮箱：15189802691@sina.cn</span>
+        <span>Q&nbsp;Q：747766248</span>
+    </div>
+    <div class="middle">联系方式</div>
+    <div class="right" id="map"></div>
+</div>
+</body>
+</html>
