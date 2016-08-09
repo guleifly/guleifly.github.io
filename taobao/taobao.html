@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;list-style-type: none;
+        }
+        #top .topInfo{height: 36px;width: 100%;background: #f4f4f4;position: fixed;left: 0;top:0;z-index: 2;}
+        #top .left{height: 36px;float: left;margin-left: 75px;}
+        #top .title{height: 36px;width: 70px;}
+        #top .title a{display: inline-block;width: 100%;height: 100%;line-height: 36px;text-align: center;color: #6C6C6C;font-size: 12px;text-decoration: none;}
+        #top .title img{vertical-align: middle;}
+        #top .top-nav:hover .title img{transform: rotate(180deg)}
+        #top .top-nav{position: relative;display: inline-block;}
+        #top .left-content{width: 260px;height: 200px;position: absolute;left: 0;top: 36px;display: none;}
+        #top .top-nav:hover .content{border: 1px solid #ededed;border-top-color:white;display: block;background: white;}
+        #top .top-nav:hover .title{border-left: 1px solid #ededed;border-right: 1px solid #ededed;background: white;width: 68px;}
+        #top .tuichu{float: right;font-size: 12px;color: #8bbcc3;font-family: "微软雅黑", "宋体";cursor: pointer;margin-top: 10px;margin-right: 10px;}
+        #top .tuichu:hover{color:#ed8821; }
+        #top .tequan{width: calc(100% - 20px);height: 100px;margin-top: 10px;border-bottom: 1px solid #ededed;display: inline-block;margin-left: 10px;}
+        #top .tequan span{line-height: 100px;font-size: 12px;font-weight: bold;font-family: "微软雅黑", "宋体";}
+        #top .head{height: 80px;width: 80px;border-radius: 50%; overflow: hidden;display: inline-block;vertical-align: middle;}
+        #top .pic{margin-left: 10px;margin-top: 10px;}
+        #top .right{float: right;margin-right: 90px;}
+        #top .top-nav .hide-ul{position: absolute;left: 0;top: 36px;display: none;}
+        #top .top-nav .hide-ul li{padding: 5px;font-size: 12px;color: #6C6C6C;font-family: "微软雅黑", "宋体";white-space:nowrap;cursor: pointer;}
+        #top .top-nav .hide-ul li:hover{background:#ededed ;}
+        #top .right-content{padding: 5px;white-space: nowrap;position: absolute;left: 0;top: 36px;font-size: 12px;display: none;}
+        #top .right-content .check-shop{padding: 5px;background: #FD5501;color: white;text-decoration: none;}
+        #top .web-nav{position: absolute;right: 0;top: 36px;display: none;width: 1200px;height: 180px;}
+        #top .web-nav h3{line-height: 60px;font-size: 18px;margin-left: 17px;}
+        .orange{color: orange;}
+        .green{color: green;}
+        .red{color: red;}
+        .blue{color: blue;}
+        #top .sub-nav-cell{float: left;width: 298px;margin-top: 20px;border-right: 2px solid #ededed;}
+        #top .sub-nav-box{font-size:12px;color: #6c6c6c; }
+        #top .sub-nav-box li{float: left;width: 60px;height: 26px;margin-left: 10px; }
+        #top .sub-nav-box li a{text-decoration: none;font-size: 12px;color: #6C6C6C;font-family: "微软雅黑", "宋体";padding: 5px;display: inline-block;border-radius: 3px;}
+        #top .orange-sp a:hover{background:orange;color: white; }
+        #top .red-hot a:hover{background:red;color: white; }
+        #top .blue-more a:hover{background:blue;color: white; }
+        #top .green-shop a:hover{background:green;color: white; }
+        #top .top-content{margin-left: 70px;margin-top: 45px;display: inline-block;vertical-align: middle;height: 90px;}
+        #top .outer{border: 2px solid #FD5501;height: 40px;float: left;}
+        #top .top-search{height: 70px;width: 720px;display: inline-block;vertical-align: middle;}
+        #top .top-search .choose{width:75px;height: 40px; float: left;position: relative;}
+        #top .top-search .choose a{height: 40px;display: inline-block;width: 75px;line-height: 40px;text-decoration: none;font-size: 12px;color: black;text-align: center}
+        #top .top-search .choose .second{display: none;position: absolute;left: 0;top: 40px;}
+        #top .top-search .choose:hover .second{display: block;background: white;}
+        #top .top-search .choose:hover a img{transform: rotate(180deg)}
+        #top .top-search .search{width: 506px;height: 40px;float: left;border: none;font-size: 25px;}
+        #top .top-search .btn{float: left;width: 95px;height: 44px;background: #FD5501;font-size: 20px;color: white;text-align: center;line-height: 44px;cursor: pointer;}
+        #top .top-search .higer{float: left;width: 30px;font-size: 12px;color:#6C6C6C;text-align: center;padding: 5px;cursor: pointer;}
+        #top .top-search .more{clear: both;padding-top: 5px;}
+        #top .top-search .more li{font-size: 14px;color: #6C6C6C;font-family: "微软雅黑", "宋体";float: left;margin-left: 10px;cursor: pointer;}
+        #nav{margin-left: 70px;margin-top: 30px}
+        #nav .shop-server{float: left;width: 150px;border: 1px solid #fd5501;position: relative;}
+        #nav .shop-server>span{display: inline-block;width: 150px;height: 40px;line-height: 40px;text-align: center;color: white;background: #FD5501;font-weight: bold; }
+        #nav .shop-server .side-li{width: 140px;margin: 0 auto;}
+        #nav .shop-server .side-li li{width: 140px;height: 32px;line-height: 32px;text-align: center;color:#6C6C6C;border-bottom: 2px solid #ededed;font-size: 14px;font-weight: bold;cursor: pointer;}
+        #nav .shop-server .side-li li:hover{border: 1px solid #fd5501;border-right-color: white;width: 148px;height: 32px;margin-left: -4px;}
+        #nav .shop-server .disp{width: 750px;height: 500px;background: white;position: absolute;left: 150px;top: 40px;border: 1px solid #9ca0a2;border-left: none;z-index: -2;}
+        #nav .shop-server .goods>li{float: left;width: 350px;padding-left: 20px;padding-top: 10px;height: 160px;}
+        #nav .shop-server .goods>li span{font-size: 14px;font-weight: bold;}
+        #nav .shop-server .goods-con{margin-top: 10px;width: 330px;}
+        #nav .shop-server .goods-con li{float: left;margin-right: 20px;font-size: 12px;color: #6c6c6c;margin-top: 10px;cursor: pointer;}
+        #nav .shop-server .goods-con li:hover{color: #fdd32c;}
+    </style>
+</head>
+<body>
+<div class="top" id="top">
+    <div class="topInfo">
+        <div class="left">
+            <div class="top-nav">
+                <div class="title">
+                    <a href="javascript:;">聚合素材 <img src="img/arrow.png" alt=""></a>
+                </div>
+                <div class="content left-content">
+                    <span class="tuichu">账号管理 | 退出</span>
+                    <div class="tequan">
+                        <div class="head">
+                            <img src="img/user-head.jpg" alt="" >
+                        </div>
+                        <span>查看我的会员特权</span>
+                    </div>
+                    <div class="pic">
+                        <img src="img/icon.png" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="top-nav">
+                <div class="title">
+                    <a href="javascript:;">消息 <img src="img/arrow.png" alt=""></a>
+                </div>
+                <div class="content left-content">
+                    <span class="tuichu">账号管理 | 退出</span>
+                    <div class="tequan">
+                        <div class="head">
+                            <img src="img/user-head.jpg" alt="" >
+                        </div>
+                        <span>查看我的会员特权</span>
+                    </div>
+                    <div class="pic">
+                        <img src="img/icon.png" alt="">
+                    </div>
+                </div>
+            </div>
+            <img src="img/qqq.gif" alt="" style="height: 34px;vertical-align:middle;">
+        </div>
+        <div class="right">
+            <div class="top-nav">
+                <div class="title">
+                    <a href="javascript:;">我的淘宝 <img src="img/arrow.png" alt=""></a>
+                </div>
+                <ul class="content hide-ul">
+                    <li>已买到的宝贝</li>
+                    <li>新欢</li>
+                    <li>我的足迹</li>
+                    <li>我的上新</li>
+                    <li>我的优惠</li>
+                </ul>
+            </div>
+            <div class="top-nav">
+                <div class="title">
+                    <a href="javascript:;">购物车 <img src="img/arrow.png" alt=""></a>
+                </div>
+                <div class="content right-content">
+                    <span>您购物车里还没有任何宝贝。</span> <a class="check-shop" href="javascript:;">查看我的购物车</a>
+                </div>
+            </div>
+            <div class="top-nav">
+                <div class="title">
+                    <a href="javascript:;">收藏夹 <img src="img/arrow.png" alt=""></a>
+                </div>
+                <ul class="content hide-ul">
+                    <li>收藏的宝贝</li>
+                    <li>收藏的店铺</li>
+                </ul>
+            </div>
+            <div class="top-nav">
+                <div class="title">
+                    <a href="javascript:;">卖家中心 <img src="img/arrow.png" alt=""></a>
+                </div>
+                <ul class="content hide-ul">
+                    <li>已卖出的宝贝</li>
+                    <li>出售中的宝贝</li>
+                    <li>卖家服务市场</li>
+                    <li>卖家培训中心</li>
+                </ul>
+            </div>
+            <div class="top-nav">
+                <div class="title">
+                    <a href="javascript:;">网站导航 <img src="img/arrow.png" alt=""></a>
+                </div>
+                <div class="web-nav content">
+                    <div class="sub-nav-cell">
+                        <h3 class="orange">主题市场</h3>
+                        <ul class="sub-nav-box orange-sp">
+                            <li><a href="#">爱美女人</a></li>
+                            <li><a href="#">品质男人</a></li>
+                            <li><a href="#">淘宝二手</a></li>
+                            <li><a href="#">全球购</a></li>
+                            <li><a href="#">品牌街</a></li>
+                            <li><a href="#">汽车生活</a></li>
+                            <li><a href="#">花嫁新娘</a></li>
+                            <li><a href="#">孕婴童</a></li>
+                            <li><a href="#">同城便民</a></li>
+                            <li><a href="#">爱么装</a></li>
+                            <li><a href="#">运动户外</a></li>
+                        </ul>
+                    </div>
+                    <div class="sub-nav-cell">
+                        <h3 class="green">特色购物</h3>
+                        <ul class="sub-nav-box green-shop">
+                            <li><a href="#">爱美女人</a></li>
+                            <li><a href="#">品质男人</a></li>
+                            <li><a href="#">淘宝二手</a></li>
+                            <li><a href="#">全球购</a></li>
+                            <li><a href="#">品牌街</a></li>
+                            <li><a href="#">汽车生活</a></li>
+                            <li><a href="#">花嫁新娘</a></li>
+                            <li><a href="#">孕婴童</a></li>
+                            <li><a href="#">同城便民</a></li>
+                            <li><a href="#">爱么装</a></li>
+                            <li><a href="#">运动户外</a></li>
+                            <li><a href="#">家用电器</a></li>
+
+                        </ul>
+                    </div>
+                    <div class="sub-nav-cell">
+                        <h3 class="red">当前热点</h3>
+                        <ul class="sub-nav-box red-hot">
+                            <li><a href="#">爱美女人</a></li>
+                            <li><a href="#">品质男人</a></li>
+                            <li><a href="#">淘宝二手</a></li>
+                            <li><a href="#">全球购</a></li>
+                            <li><a href="#">品牌街</a></li>
+                            <li><a href="#">汽车生活</a></li>
+                            <li><a href="#">花嫁新娘</a></li>
+                            <li><a href="#">孕婴童</a></li>
+                            <li><a href="#">同城便民</a></li>
+                            <li><a href="#">爱么装</a></li>
+                            <li><a href="#">运动户外</a></li>
+
+                        </ul>
+                    </div>
+                    <div class="sub-nav-cell" style="border-right: none;">
+                        <h3 class="blue">更多精彩</h3>
+                        <ul class="sub-nav-box blue-more">
+                            <li><a href="#">爱美女人</a></li>
+                            <li><a href="#">品质男人</a></li>
+                            <li><a href="#">淘宝二手</a></li>
+                            <li><a href="#">全球购</a></li>
+                            <li><a href="#">品牌街</a></li>
+                            <li><a href="#">汽车生活</a></li>
+                            <li><a href="#">花嫁新娘</a></li>
+                            <li><a href="#">孕婴童</a></li>
+                            <li><a href="#">同城便民</a></li>
+                            <li><a href="#">爱么装</a></li>
+                            <li><a href="#">运动户外</a></li>
+                            <li><a href="#">家用电器</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="top-content">
+        <img src="img/logo.gif" alt="" style="vertical-align: middle;">
+        <div class="top-search">
+            <div class="box">
+                <div class="outer">
+                    <div class="choose">
+                        <a href="javascript:;" style="background: #ededed;">宝贝 <img src="img/arrow.png" alt="" style="vertical-align: middle;"></a><br>
+                        <a href="javascript:;" class="second">店铺 </a>
+                    </div>
+                    <input type="text" class="search">
+                </div>
+                <div class="btn">搜索</div>
+                <div class="higer">高级搜索</div>
+            </div>
+            <ul class="more">
+                <li>女士凉鞋</li>
+                <li>女士凉鞋</li>
+                <li>女士凉鞋</li>
+                <li>女士凉鞋</li>
+                <li>女士凉鞋</li>
+                <li>女士凉鞋</li>
+                <li>女士凉鞋</li>
+                <li>女士凉鞋</li>
+                <li>女士凉鞋</li>
+            </ul>
+        </div>
+        <img src="img/code.png" alt="" style="vertical-align: middle;margin-left: 120px;">
+    </div>
+</div>
+<div id="nav">
+    <div class="shop-server">
+        <span>商品服务分类</span>
+        <ul class="side-li">
+            <li>服装内衣</li>
+            <li>汽车摩托</li>
+            <li>服装内衣</li>
+            <li>日用百货</li>
+            <li>美食特产</li>
+            <li>家具建材</li>
+            <li>服装内衣</li>
+            <li>家纺居家</li>
+            <li>母婴用品</li>
+            <li>服装内衣</li>
+            <li>服装内衣</li>
+            <li>护肤彩妆</li>
+            <li>家电办公</li>
+            <li>服装内衣</li>
+            <li>手机数码</li>
+            <li>珠宝手表</li>
+        </ul>
+        <div class="disp">
+            <ul class="goods">
+                <li>
+                    <span>印记女装</span>
+                    <ul class="goods-con">
+                        <li>牛仔裤</li>
+                        <li>牛仔裤</li>
+                        <li>牛仔裤</li>
+                        <li>牛仔裤</li>
+                        <li>牛仔裤</li>
+                        <li>牛仔裤</li>
+                        <li>牛仔裤</li>
+                        <li>牛仔裤</li>
+                        <li>雪绒钱</li>
+                        <li>雪绒钱</li>
+                        <li>雪绒钱</li>
+                        <li>雪绒钱</li>
+                        <li>雪绒钱</li>
+                        <li>雪绒钱</li>
+                        <li>棒球服</li>
+                        <li>棒球服</li>
+                        <li>棒球服</li>
+                        <li>棒球服</li>
+                        <li>棒球服</li>
+                        <li>棒球服</li>
+                    </ul>
+                </li>
+                <li>
+                    <span>印记女装</span>
+                    <ul class="goods-con">
+                        <li>牛仔裤</li>
+                        <li>牛仔裤</li>
+                        <li>牛仔裤</li>
+                        <li>牛仔裤</li>
+                        <li>牛仔裤</li>
+                        <li>牛仔裤</li>
+                        <li>牛仔裤</li>
+                        <li>牛仔裤</li>
+                        <li>雪绒钱</li>
+                        <li>雪绒钱</li>
+                        <li>雪绒钱</li>
+                        <li>雪绒钱</li>
+                        <li>雪绒钱</li>
+                        <li>雪绒钱</li>
+                        <li>棒球服</li>
+                        <li>棒球服</li>
+                        <li>棒球服</li>
+                        <li>棒球服</li>
+                        <li>棒球服</li>
+                        <li>棒球服</li>
+                    </ul>
+                </li>
+                <li>
+                    <span>印记女装</span>
+                    <ul class="goods-con">
+                        <li>牛仔裤</li>
+                        <li>牛仔裤</li>
+                        <li>牛仔裤</li>
+                        <li>牛仔裤</li>
+                        <li>牛仔裤</li>
+                        <li>牛仔裤</li>
+                        <li>牛仔裤</li>
+                        <li>牛仔裤</li>
+                        <li>雪绒钱</li>
+                        <li>雪绒钱</li>
+                        <li>雪绒钱</li>
+                        <li>雪绒钱</li>
+                        <li>雪绒钱</li>
+                        <li>雪绒钱</li>
+                        <li>棒球服</li>
+                        <li>棒球服</li>
+                        <li>棒球服</li>
+                        <li>棒球服</li>
+                        <li>棒球服</li>
+                        <li>棒球服</li>
+                    </ul>
+                </li>
+                <li>
+                    <span>印记女装</span>
+                    <ul class="goods-con">
+                        <li>牛仔裤</li>
+                        <li>牛仔裤</li>
+                        <li>牛仔裤</li>
+                        <li>牛仔裤</li>
+                        <li>牛仔裤</li>
+                        <li>牛仔裤</li>
+                        <li>牛仔裤</li>
+                        <li>牛仔裤</li>
+                        <li>雪绒钱</li>
+                        <li>雪绒钱</li>
+                        <li>雪绒钱</li>
+                        <li>雪绒钱</li>
+                        <li>雪绒钱</li>
+                        <li>雪绒钱</li>
+                        <li>棒球服</li>
+                        <li>棒球服</li>
+                        <li>棒球服</li>
+                        <li>棒球服</li>
+                        <li>棒球服</li>
+                        <li>棒球服</li>
+                    </ul>
+                </li>
+                <li>
+                    <span>印记女装</span>
+                    <ul class="goods-con">
+                        <li>牛仔裤</li>
+                        <li>牛仔裤</li>
+                        <li>牛仔裤</li>
+                        <li>牛仔裤</li>
+                        <li>牛仔裤</li>
+                        <li>牛仔裤</li>
+                        <li>牛仔裤</li>
+                        <li>牛仔裤</li>
+                        <li>雪绒钱</li>
+                        <li>雪绒钱</li>
+                        <li>雪绒钱</li>
+                        <li>雪绒钱</li>
+                        <li>雪绒钱</li>
+                        <li>雪绒钱</li>
+                        <li>棒球服</li>
+                        <li>棒球服</li>
+                        <li>棒球服</li>
+                        <li>棒球服</li>
+                        <li>棒球服</li>
+                        <li>棒球服</li>
+                    </ul>
+                </li>
+                <li>
+                    <span>印记女装</span>
+                    <ul class="goods-con">
+                        <li>牛仔裤</li>
+                        <li>牛仔裤</li>
+                        <li>牛仔裤</li>
+                        <li>牛仔裤</li>
+                        <li>牛仔裤</li>
+                        <li>牛仔裤</li>
+                        <li>牛仔裤</li>
+                        <li>牛仔裤</li>
+                        <li>雪绒钱</li>
+                        <li>雪绒钱</li>
+                        <li>雪绒钱</li>
+                        <li>雪绒钱</li>
+                        <li>雪绒钱</li>
+                        <li>雪绒钱</li>
+                        <li>棒球服</li>
+                        <li>棒球服</li>
+                        <li>棒球服</li>
+                        <li>棒球服</li>
+                        <li>棒球服</li>
+                        <li>棒球服</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+    <div class="right-con"></div>
+</div>
+</body>
+</html>
