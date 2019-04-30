@@ -1,0 +1,25 @@
+<template>
+    <a-icon :component="a"/>
+</template>
+
+<script>
+    export default {
+        name: "mobile",
+        data(){
+            return{
+                a:{
+                    template: `<svg version="1.1" id="图层_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 24 24" style="enable-background:new 0 0 24 24;" xml:space="preserve">
+<path class="st0" d="M18.9,3.5c0-1.1-0.9-2-2-2H7.1c-1.1,0-2,0.9-2,2v17c0,1.1,0.9,2,2,2h9.8c1.1,0,2-0.9,2-2V3.5z M12,20.8
+	c-1,0-1.7-0.8-1.7-1.8c0-1,0.8-1.7,1.7-1.7s1.7,0.8,1.7,1.7C13.7,20,13,20.8,12,20.8z M14.7,5H9.3C8.8,5,8.5,4.6,8.5,4.1
+	c0-0.4,0.4-0.9,0.8-0.9h5.4c0.4,0,0.8,0.4,0.8,0.9C15.5,4.6,15.1,5,14.7,5z"/>
+</svg>`
+                }
+            }
+        }
+    }
+</script>
+
+<style scoped>
+
+</style>

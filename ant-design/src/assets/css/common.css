@@ -1,0 +1,118 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+li {
+    list-style-type: none;
+}
+
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
+
+.text-overflow {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap
+}
+
+.h3-title {
+    font-family: PingFangSC-Semibold;
+    font-size: 28px;
+    color: #1E1E1E;
+    line-height: 28px;
+    font-weight: bold;
+    margin-bottom: 0;
+}
+
+.text-2 {
+    text-overflow: -o-ellipsis-lastline;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+a:hover {
+    -webkit-tap-highlight-color: transparent;
+}
+
+.p11 {
+    padding-bottom: 1.1rem;
+}
+
+.full {
+    display: block;
+    width: 100%;
+}
+
+.releative {
+    position: relative;
+}
+
+.m28 {
+    margin-top: 28px;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.ant-table-thead > tr > th {
+    text-align: center;
+    font-family: PingFangSC-Semibold;
+    font-size: 14px;
+    color: #666666;
+}
+
+td {
+    text-align: center;
+    font-size: 14px;
+    color: #666666;
+}
+
+td.right {
+    text-align: right !important;
+}
+
+tr:hover {
+    background-color: #fff !important;
+}
+
+.inline-block-act {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.inline-block-act:last-child {
+    margin-right: 0;
+}
+
+.icon-table svg {
+    width: 24px;
+    height: 24px;
+}
+
+.icon-conponent {
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.icon-conponent:hover {
+    color: #128CE6;
+}
+
+.ant-modal:not(.ant-modal-confirm) {
+    width: 800px !important;
+}

@@ -1,0 +1,27 @@
+<template>
+    <a-icon :component="a" />
+</template>
+
+<script>
+    export default {
+        name: "kf",
+        data(){
+            return{
+                a:{
+                    template: `<svg version="1.1" id="图层_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 24 24" style="enable-background:new 0 0 24 24;" xml:space="preserve">
+<path class="st0" d="M15.8,11.7H8.2c-0.6,0-1-0.4-1-1s0.4-1,1-1h7.6c0.6,0,1,0.4,1,1S16.3,11.7,15.8,11.7z M14.5,16.3
+	c0-0.6-0.4-1-1-1H8.2c-0.6,0-1,0.4-1,1s0.4,1,1,1h5.3C14.1,17.3,14.5,16.8,14.5,16.3z M21.7,5.6v15.9c0,1.4-1.1,2.6-2.5,2.6H4.8
+	c-1.4,0-2.5-1.2-2.5-2.6V5.6C2.3,4.1,3.4,3,4.8,3h2.4V2c0-1.1,0.9-2,2-2h5.6c1.1,0,2,0.9,2,2v1h2.4C20.6,3,21.7,4.1,21.7,5.6z
+	 M9.2,2l0,2.6h5.6V2H9.2z M19.7,5.6c0-0.3-0.2-0.6-0.5-0.6h-2.4v1.6H7.2V5H4.8C4.5,5,4.3,5.2,4.3,5.6v15.9c0,0.3,0.2,0.6,0.5,0.6
+	h14.4c0.3,0,0.5-0.3,0.5-0.6V5.6z"/>
+</svg>`
+                }
+            }
+        }
+    }
+</script>
+
+<style scoped>
+
+</style>

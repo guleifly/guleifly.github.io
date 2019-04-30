@@ -1,0 +1,25 @@
+.rule{
+    font-family: PingFangSC-Regular;
+    font-size: 12px;
+    color: #999999;
+    line-height: 14px;
+    display: inline-block;
+    margin-left: 16px;
+    cursor: pointer;
+}
+#submit{
+    width: 170px;
+    height: 40px;
+    line-height: 40px;
+    background: #128CE6;
+    margin-top: 24px;
+}
+.wrap-account{
+    padding: 60px;
+}
+.label{
+    font-family: PingFangSC-Semibold;
+    font-size: 16px;
+    color: #1E1E1E;
+    line-height: 16px;
+}
